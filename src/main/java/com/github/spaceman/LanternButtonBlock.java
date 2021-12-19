@@ -44,7 +44,7 @@ public class LanternButtonBlock extends LanternBlock {
     public void powerOn(BlockState state, World world, BlockPos pos) {
         world.setBlockState(pos, (BlockState) state.with(POWERED, true), 3);
         this.updateNeighbors(state, world, pos);
-        world.getBlockTickScheduler().schedule(pos, this, this.getPressTicks());
+        //world.getBlockTickScheduler().schedule(pos, this, this.getPressTicks());
     }
 
     private int getPressTicks() {
