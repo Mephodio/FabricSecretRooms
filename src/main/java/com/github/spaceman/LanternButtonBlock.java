@@ -44,7 +44,7 @@ public class LanternButtonBlock extends LanternBlock {
     public void powerOn(BlockState state, World world, BlockPos pos) {
         world.setBlockState(pos, (BlockState) state.with(POWERED, true), 3);
         this.updateNeighbors(state, world, pos);
-        //world.getBlockTickScheduler().schedule(pos, this, this.getPressTicks());
+        world.createAndScheduleBlockTick(pos, this, this.getPressTicks());
     }
 
     private int getPressTicks() {
@@ -76,6 +76,7 @@ public class LanternButtonBlock extends LanternBlock {
             super.onStateReplaced(state, world, pos, newState, notify);
         }
     }
+    
 
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
         return (Boolean) state.get(POWERED) ? 15 : 0;

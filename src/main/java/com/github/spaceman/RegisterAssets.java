@@ -5,12 +5,10 @@ import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.blockstate.JState;
 import net.devtech.arrp.json.lang.JLang;
 import net.devtech.arrp.json.models.JModel;
-
 import net.minecraft.util.Identifier;
 
 public class RegisterAssets {
-    public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack
-            .create(new Identifier(SecretRooms.MOD_ID, "client_pack"));
+    public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create(new Identifier(SecretRooms.MOD_ID, "secret_rooms_assets"));
 
     public static void register() {
         for (int i = 0; i < SecretRooms.copyBlockList.size(); i++) {
@@ -28,12 +26,12 @@ public class RegisterAssets {
             // Add Glass Blockstates
             RESOURCE_PACK.addBlockState(
                 JState.state().add(JState.variant()
-                        .put("facing", "up", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).x(270).uvlock())
-                        .put("facing", "down", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).x(90).uvlock())
-                        .put("facing", "north", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).uvlock())
-                        .put("facing", "east", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).y(90).uvlock())
-                        .put("facing", "south", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).y(180).uvlock())
-                        .put("facing", "west", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).y(270).uvlock())),
+                        .put("facing=up", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).x(270).uvlock())
+                        .put("facing=down", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).x(90).uvlock())
+                        .put("facing=north", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).uvlock())
+                        .put("facing=east", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).y(90).uvlock())
+                        .put("facing=south", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).y(180).uvlock())
+                        .put("facing=west", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + glassTranslationKey)).y(270).uvlock())),
                 new Identifier(SecretRooms.MOD_ID, glassTranslationKey)
             );
 
@@ -41,6 +39,71 @@ public class RegisterAssets {
             RESOURCE_PACK.addBlockState(
                 JState.state().add(JState.variant(JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + ghostBlockTranslationKey)))),
                 new Identifier(SecretRooms.MOD_ID, ghostBlockTranslationKey)
+            );
+
+            // Add Camo Door Blockstates
+            RESOURCE_PACK.addBlockState(
+                JState.state().add(JState.variant()
+                    .put("facing=east,half=lower,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock())
+                    .put("facing=east,half=lower,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock().y(90))
+                    .put("facing=east,half=lower,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock())
+                    .put("facing=east,half=lower,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock().y(270))
+                    .put("facing=east,half=upper,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock())
+                    .put("facing=east,half=upper,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock().y(90))
+                    .put("facing=east,half=upper,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock())
+                    .put("facing=east,half=upper,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock().y(270))
+
+                    .put("facing=north,half=lower,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock().y(270))
+                    .put("facing=north,half=lower,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock())
+                    .put("facing=north,half=lower,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock().y(270))
+                    .put("facing=north,half=lower,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock().y(180))
+                    .put("facing=north,half=upper,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock().y(270))
+                    .put("facing=north,half=upper,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock())
+                    .put("facing=north,half=upper,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock().y(270))
+                    .put("facing=north,half=upper,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock().y(180))
+
+                    .put("facing=south,half=lower,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock().y(90))
+                    .put("facing=south,half=lower,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock().y(180))
+                    .put("facing=south,half=lower,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock().y(90))
+                    .put("facing=south,half=lower,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock())
+                    .put("facing=south,half=upper,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock().y(90))
+                    .put("facing=south,half=upper,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock().y(180))
+                    .put("facing=south,half=upper,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock().y(90))
+                    .put("facing=south,half=upper,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock())
+
+                    .put("facing=west,half=lower,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock().y(180))
+                    .put("facing=west,half=lower,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock().y(270))
+                    .put("facing=west,half=lower,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom_hinge")).uvlock().y(180))
+                    .put("facing=west,half=lower,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_bottom")).uvlock().y(90))
+                    .put("facing=west,half=upper,hinge=left,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock().y(180))
+                    .put("facing=west,half=upper,hinge=left,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock().y(270))
+                    .put("facing=west,half=upper,hinge=right,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top_hinge")).uvlock().y(180))
+                    .put("facing=west,half=upper,hinge=right,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey + "_top")).uvlock().y(90))
+                ), 
+                new Identifier(SecretRooms.MOD_ID, camoDoorTranslationKey)
+            );
+
+            // Add Camo Trapdoor Blockstates
+            RESOURCE_PACK.addBlockState(
+                JState.state().add(JState.variant()
+                    .put("facing=north,half=bottom,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_bottom")).uvlock())
+                    .put("facing=south,half=bottom,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_bottom")).uvlock().y(180))
+                    .put("facing=east,half=bottom,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_bottom")).uvlock().y(90))
+                    .put("facing=west,half=bottom,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_bottom")).uvlock().y(270))
+                    .put("facing=north,half=top,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_top")).uvlock())
+                    .put("facing=south,half=top,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_top")).uvlock().y(180))
+                    .put("facing=east,half=top,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_top")).uvlock().y(90))
+                    .put("facing=west,half=top,open=false", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_top")).uvlock().y(270))
+                    .put("facing=north,half=bottom,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock())
+                    .put("facing=south,half=bottom,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().y(180))
+                    .put("facing=east,half=bottom,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().y(90))
+                    .put("facing=west,half=bottom,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().y(270))
+                    .put("facing=north,half=top,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().x(180).y(180))
+                    .put("facing=south,half=top,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().x(180))
+                    .put("facing=east,half=top,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().x(180).y(270))
+                    .put("facing=west,half=top,open=true", JState.model(new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")).uvlock().x(180).y(90))
+                ), 
+                new Identifier(SecretRooms.MOD_ID, camoTrapdoorTranslationKey)
             );
 
             // Add Glass Block Model
@@ -63,6 +126,61 @@ public class RegisterAssets {
                 new Identifier(SecretRooms.MOD_ID, "block/" + ghostBlockTranslationKey)
             );
 
+            // Add Camo Door Block Models
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID + ":block/door_bottom").textures(JModel.textures()
+                    .var("top", "minecraft:block/" + textureTranslationKey)
+                    .var("bottom", "minecraft:block/" + textureTranslationKey)
+                ), 
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey+"_bottom")
+            );
+
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID + ":block/door_bottom_hinge").textures(JModel.textures()
+                    .var("top", "minecraft:block/" + textureTranslationKey)
+                    .var("bottom", "minecraft:block/" + textureTranslationKey)
+                ), 
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey+"_bottom_hinge")
+            );
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID + ":block/door_top").textures(JModel.textures()
+                    .var("top", "minecraft:block/" + textureTranslationKey)
+                    .var("bottom", "minecraft:block/" + textureTranslationKey)
+                ), 
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey+"_top")
+            );
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID + ":block/door_top_hinge").textures(JModel.textures()
+                    .var("top", "minecraft:block/" + textureTranslationKey)
+                    .var("bottom", "minecraft:block/" + textureTranslationKey)
+                ), 
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoDoorTranslationKey+"_top_hinge")
+            );
+
+
+            // Add Camo Trapdoor Block Model
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID+":block/template_orientable_trapdoor_bottom").textures(JModel.textures()
+                    .particle("minecraft:block/"+textureTranslationKey)
+                    .var("texture", "minecraft:block/" + textureTranslationKey)
+                ),  
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_bottom")
+            );
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID+":block/template_orientable_trapdoor_top").textures(JModel.textures()
+                    .particle("minecraft:block/"+textureTranslationKey)
+                    .var("texture", "minecraft:block/" + textureTranslationKey)
+                ), 
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_top")
+            );            
+            RESOURCE_PACK.addModel(
+                JModel.model().parent(SecretRooms.MOD_ID+":block/template_orientable_trapdoor_open").textures(JModel.textures()
+                    .particle("minecraft:block/"+textureTranslationKey)
+                    .var("texture", "minecraft:block/" + textureTranslationKey)
+                ), 
+                new Identifier(SecretRooms.MOD_ID, "block/" + camoTrapdoorTranslationKey + "_open")
+            );            
+            
             // Add Glass Block Item Model
             RESOURCE_PACK.addModel(
                 JModel.model().parent(SecretRooms.MOD_ID + ":block/" + glassTranslationKey),
@@ -85,7 +203,7 @@ public class RegisterAssets {
 
             // Add Camo Trapdoor Item Model
             RESOURCE_PACK.addModel(
-                JModel.model().parent(SecretRooms.MOD_ID + ":block/" + camoTrapdoorTranslationKey),
+                JModel.model().parent(SecretRooms.MOD_ID + ":block/" + camoTrapdoorTranslationKey + "_bottom"),
                 new Identifier(SecretRooms.MOD_ID, "item/" + camoTrapdoorTranslationKey)
             );
 
@@ -99,341 +217,6 @@ public class RegisterAssets {
         }
 
         RRPCallback.AFTER_VANILLA.register(a -> a.add(RESOURCE_PACK));
-        // //camo trapdoor block model
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoTrapdoorTranslationKey+"_bottom"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID,
-        // "block/template_orientable_trapdoor_bottom"))
-        // .texture("texture", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoTrapdoorTranslationKey+"_top"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID,
-        // "block/template_orientable_trapdoor_top"))
-        // .texture("texture", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoTrapdoorTranslationKey+"_open"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID,
-        // "block/template_orientable_trapdoor_open"))
-        // .texture("texture", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-        // //Camo door blockstate
-        // pack.addBlockState(new Identifier(SecretRooms.MOD_ID,
-        // camoDoorTranslationKey), state -> state
-        // .variant("facing=east,half=lower,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=lower,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=lower,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=lower,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=upper,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=upper,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=upper,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=upper,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=lower,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=lower,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=lower,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=lower,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=upper,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=upper,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=upper,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=upper,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=lower,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=lower,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=lower,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=lower,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=upper,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=upper,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=upper,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=upper,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=lower,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=lower,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=lower,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom_hinge"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=lower,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_bottom"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=upper,hinge=left,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=upper,hinge=left,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=upper,hinge=right,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top_hinge"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=upper,hinge=right,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoDoorTranslationKey+"_top"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // );
-        // //Camo trapdoor blockstate
-        // pack.addBlockState(new Identifier(SecretRooms.MOD_ID,
-        // camoTrapdoorTranslationKey), state -> state
-        // .variant("facing=north,half=bottom,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_bottom"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=bottom,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_bottom"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=bottom,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_bottom"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=bottom,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_bottom"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=top,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_top"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=top,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_top"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=top,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_top"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=top,open=false", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_top"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=bottom,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=bottom,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=bottom,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=bottom,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=north,half=top,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationX(180)
-        // .rotationY(180)
-        // .uvlock(true)
-        // )
-        // .variant("facing=south,half=top,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationX(180)
-        // .rotationY(0)
-        // .uvlock(true)
-        // )
-        // .variant("facing=east,half=top,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationX(180)
-        // .rotationY(270)
-        // .uvlock(true)
-        // )
-        // .variant("facing=west,half=top,open=true", variant -> variant
-        // .model(new Identifier(SecretRooms.MOD_ID,
-        // "block/"+camoTrapdoorTranslationKey+"_open"))
-        // .rotationX(180)
-        // .rotationY(90)
-        // .uvlock(true)
-        // )
-        // );
-
-        // //Camo door block model
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoDoorTranslationKey+"_bottom"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID, "block/door_bottom"))
-        // .texture("top", new Identifier("minecraft:block/"+textureTranslationKey))
-        // .texture("bottom", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoDoorTranslationKey+"_bottom_hinge"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID, "block/door_bottom_hinge"))
-        // .texture("top", new Identifier("minecraft:block/"+textureTranslationKey))
-        // .texture("bottom", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoDoorTranslationKey+"_top"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID, "block/door_top"))
-        // .texture("top", new Identifier("minecraft:block/"+textureTranslationKey))
-        // .texture("bottom", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-        // pack.addBlockModel(new Identifier(SecretRooms.MOD_ID,
-        // camoDoorTranslationKey+"_top_hinge"), model -> model
-        // .parent(new Identifier(SecretRooms.MOD_ID, "block/door_top_hinge"))
-        // .texture("top", new Identifier("minecraft:block/"+textureTranslationKey))
-        // .texture("bottom", new Identifier("minecraft:block/"+textureTranslationKey))
-        // );
-
     }
 
     static String stringClean(String input) {

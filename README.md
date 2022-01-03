@@ -3,4 +3,5 @@
 ## Dependencies
 
 - Fabric API & Fabric
-- Minecraft 1.17.*
+- ARRP (Included)
+- Minecraft 1.18.*
