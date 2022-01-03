@@ -60,19 +60,23 @@ public class SecretRooms implements ModInitializer {
 				Block block = copyBlockList.get(i);
 				CamoDoorBlock camoDoorBlock = doorCopyBlockMap.get(block);
 				stacks.add(new ItemStack(camoDoorBlock));
-				}
+			}
 			for (int i = 0; i < copyBlockList.size(); i++){
 				Block block = copyBlockList.get(i);
 				Block ghostBlock = ghostCopyBlockMap.get(block);
 				stacks.add(new ItemStack(ghostBlock));
-				}
-
+			}
+			for (int i = 0; i < copyBlockList.size(); i++){
+				Block block = copyBlockList.get(i);
+				Block trapdoorBlock = trapdoorCopyBlockMap.get(block);
+				stacks.add(new ItemStack(trapdoorBlock));
+			}
 		}).build();
 
 	private void registerOneWayGlassBlocks() {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
-			glassCopyBlockMap.put(block, new OneWayGlassBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+			glassCopyBlockMap.put(block, new OneWayGlassBlock(FabricBlockSettings.copyOf(Blocks.GLASS)));
 			Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_glass"), glassCopyBlockMap.get(block));
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_glass"), new BlockItem(glassCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
@@ -81,7 +85,7 @@ public class SecretRooms implements ModInitializer {
 	private void registerCamoDoorBlocks() {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
-			doorCopyBlockMap.put(block, new CamoDoorBlock(FabricBlockSettings.copy(block)));
+			doorCopyBlockMap.put(block, new CamoDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)));
 			Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_door"), doorCopyBlockMap.get(block));
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_door"), new BlockItem(doorCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
@@ -90,7 +94,7 @@ public class SecretRooms implements ModInitializer {
 	private void registerGhostBlocks() {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
-			ghostCopyBlockMap.put(block, new Block(FabricBlockSettings.copy(block).noCollision()));
+			ghostCopyBlockMap.put(block, new Block(FabricBlockSettings.copyOf(Blocks.SCAFFOLDING).noCollision()));
 			Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_ghost_block"), ghostCopyBlockMap.get(block));
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_ghost_block"), new BlockItem(ghostCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
@@ -99,7 +103,7 @@ public class SecretRooms implements ModInitializer {
 	private void registerCamoTrapdoorBlocks() {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
-			trapdoorCopyBlockMap.put(block, new CamoTrapdoorBlock(FabricBlockSettings.copy(block)));
+			trapdoorCopyBlockMap.put(block, new CamoTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)));
 			Registry.register(Registry.BLOCK, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_trapdoor"), trapdoorCopyBlockMap.get(block));
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.","")+"_camo_trapdoor"), new BlockItem(trapdoorCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
@@ -129,8 +133,8 @@ public class SecretRooms implements ModInitializer {
 
 		VanillaList.addBlocks();
 		registerOneWayGlassBlocks();
-		registerCamoDoorBlocks();
 		registerGhostBlocks();
+		registerCamoDoorBlocks();
 		registerCamoTrapdoorBlocks();
 
 		RegisterData.register();	
