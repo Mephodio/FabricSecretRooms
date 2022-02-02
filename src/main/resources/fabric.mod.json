@@ -31,5 +31,12 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
+  },
+
+  "custom": {
+    "waila:plugins": {
+      "id": "secretrooms:secretrooms",
+      "initializer": "com.github.spaceman.WailaPlugin"
+    }
   }
 }

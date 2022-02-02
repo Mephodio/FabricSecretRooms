@@ -29,6 +29,7 @@ public class SecretRooms implements ModInitializer {
 	public static Map<Block, Block> ghostCopyBlockMap = new HashMap<Block, Block>();
 	public static Map<Block, CamoTrapdoorBlock> trapdoorCopyBlockMap = new HashMap<Block, CamoTrapdoorBlock>();
 	public static List<Block> copyBlockList = new ArrayList<Block>();
+	public static final Map<Block, BlockState> wailaOverrides = new HashMap<>();
 	public static final Item CAMO_PASTE = new Item(new Item.Settings().group(SecretRooms.MAIN_GROUP).recipeRemainder(Items.BUCKET).maxCount(16));
 	public static final TorchLeverBlock TORCH_LEVER_BLOCK = new TorchLeverBlock(AbstractBlock.Settings.copy(Blocks.TORCH).luminance(createLightLevelFromBlockState(14)));
 	public static final TorchLeverBlock SOUL_TORCH_LEVER_BLOCK = new SoulTorchLeverBlock(AbstractBlock.Settings.copy(Blocks.SOUL_TORCH).luminance(createLightLevelFromBlockState(10)));
@@ -77,7 +78,8 @@ public class SecretRooms implements ModInitializer {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
 			glassCopyBlockMap.put(block, new OneWayGlassBlock(FabricBlockSettings.copyOf(Blocks.GLASS)));
-			Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_glass"), glassCopyBlockMap.get(block));
+			wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_glass"), glassCopyBlockMap.get(block)),
+					block.getDefaultState());
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_glass"), new BlockItem(glassCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
 	}
@@ -86,7 +88,8 @@ public class SecretRooms implements ModInitializer {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
 			doorCopyBlockMap.put(block, new CamoDoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)));
-			Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_door"), doorCopyBlockMap.get(block));
+			wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_door"), doorCopyBlockMap.get(block)),
+					block.getDefaultState());
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_door"), new BlockItem(doorCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
 	}
@@ -95,7 +98,8 @@ public class SecretRooms implements ModInitializer {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
 			ghostCopyBlockMap.put(block, new Block(FabricBlockSettings.copyOf(Blocks.SCAFFOLDING).noCollision()));
-			Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_ghost_block"), ghostCopyBlockMap.get(block));
+			wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_ghost_block"), ghostCopyBlockMap.get(block)),
+					block.getDefaultState());
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_ghost_block"), new BlockItem(ghostCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
 	}
@@ -104,7 +108,8 @@ public class SecretRooms implements ModInitializer {
 		for (int i = 0; i < copyBlockList.size(); i++){
 			Block block = copyBlockList.get(i);
 			trapdoorCopyBlockMap.put(block, new CamoTrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)));
-			Registry.register(Registry.BLOCK, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_trapdoor"), trapdoorCopyBlockMap.get(block));
+			wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.", "")+"_camo_trapdoor"), trapdoorCopyBlockMap.get(block)),
+					block.getDefaultState());
 			Registry.register(Registry.ITEM, new Identifier(MOD_ID, block.getTranslationKey().replaceAll("block\\.(minecraft|blockus)\\.","")+"_camo_trapdoor"), new BlockItem(trapdoorCopyBlockMap.get(block), new Item.Settings().group(SecretRooms.MAIN_GROUP)));
 		}
 	}
@@ -118,18 +123,25 @@ public class SecretRooms implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "camo_paste"), CAMO_PASTE);
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "torch_lever"), TORCH_LEVER_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "torch_lever"), new BlockItem(TORCH_LEVER_BLOCK, new Item.Settings().group(SecretRooms.MAIN_GROUP)));
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "soul_torch_lever"), SOUL_TORCH_LEVER_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "soul_torch_lever"), new BlockItem(SOUL_TORCH_LEVER_BLOCK, new Item.Settings().group(SecretRooms.MAIN_GROUP)));
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "solid_air"), SOLID_AIR_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "solid_air"), new BlockItem(SOLID_AIR_BLOCK, new Item.Settings().group(SecretRooms.MAIN_GROUP)));
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "lantern_button"), LANTERN_BUTTON_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "lantern_button"), new BlockItem(LANTERN_BUTTON_BLOCK, new Item.Settings().group(SecretRooms.MAIN_GROUP)));
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "soul_lantern_button"), SOUL_LANTERN_BUTTON_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "soul_lantern_button"), new BlockItem(SOUL_LANTERN_BUTTON_BLOCK, new Item.Settings().group(SecretRooms.MAIN_GROUP)));
-		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "redstone_chain"), REDSTONE_CHAIN);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "redstone_chain"), new BlockItem(REDSTONE_CHAIN, new Item.Settings().group(SecretRooms.MAIN_GROUP)));
+
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "solid_air"), SOLID_AIR_BLOCK);
+
+		wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "torch_lever"), TORCH_LEVER_BLOCK),
+				Blocks.TORCH.getDefaultState());
+		wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "soul_torch_lever"), SOUL_TORCH_LEVER_BLOCK),
+				Blocks.SOUL_TORCH.getDefaultState());
+		wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "lantern_button"), LANTERN_BUTTON_BLOCK),
+				Blocks.LANTERN.getDefaultState());
+		wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "soul_lantern_button"), SOUL_LANTERN_BUTTON_BLOCK),
+				Blocks.SOUL_LANTERN.getDefaultState());
+		wailaOverrides.put(Registry.register(Registry.BLOCK, new Identifier(MOD_ID , "redstone_chain"), REDSTONE_CHAIN),
+				Blocks.CHAIN.getDefaultState());
 
 		VanillaList.addBlocks();
 		registerOneWayGlassBlocks();
